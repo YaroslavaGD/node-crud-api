@@ -5,7 +5,7 @@ import { MESSAGES } from './utils/helpers';
 
 dotenv.config();
 
-const PORT = process.env.PORT || 3000;
+const PORT = Number(process.env.PORT) || 3000;
 
 const server = createServer((req, res) => {
   handleRequest(req, res);
