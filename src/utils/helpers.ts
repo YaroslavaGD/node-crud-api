@@ -10,6 +10,7 @@ export const MESSAGES = {
   INVALID_UUID: 'Invalid UUID',
   USER_NOT_FOUND: 'User not found',
   END_POINT_NOT_FOUND: 'Endpoint not found',
+  SERVER_RUNNING: 'Server running on',
 };
 
 export function setHeader(res: ServerResponse, statusCode: (typeof CODES)[keyof typeof CODES]) {

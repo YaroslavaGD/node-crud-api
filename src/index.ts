@@ -1,6 +1,7 @@
 import dotenv from 'dotenv';
 import { createServer } from 'node:http';
 import handleRequest from './routes/userRoutes';
+import { MESSAGES } from './utils/helpers';
 
 dotenv.config();
 
@@ -11,5 +12,5 @@ const server = createServer((req, res) => {
 });
 
 server.listen(PORT, () => {
-  console.log(`Server running on  ${PORT}`);
+  console.log(MESSAGES.SERVER_RUNNING, PORT);
 });
