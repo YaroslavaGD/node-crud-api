@@ -25,3 +25,29 @@ export async function getUserById(req: IncomingMessage, res: ServerResponse, id:
   setHeader(res, CODES.OK);
   res.end(JSON.stringify(user));
 }
+
+export async function createUser(req: IncomingMessage, res: ServerResponse) {
+  let body = '';
+  req.on('data', (chunk) => {
+    body += chunk;
+  });
+
+  req.on('end', () => {
+    try {
+      const { username, age, hobbies } = JSON.parse(body);
+
+      if (!username || typeof age !== 'number' || !Array.isArray(hobbies)) {
+        setHeader(res, CODES.INVALID);
+        res.end(JSON.stringify({ message: MESSAGES.INVALID_FIELDS }));
+        return;
+      }
+
+      const newUser = UsersDb.create({ username, age, hobbies });
+      setHeader(res, CODES.CREATE);
+      res.end(JSON.stringify(newUser));
+    } catch {
+      setHeader(res, CODES.SERVER_ERROR);
+      res.end(JSON.stringify({ message: MESSAGES.SERVER_ERROR }));
+    }
+  });
+}
