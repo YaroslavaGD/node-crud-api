@@ -5,26 +5,36 @@ import { CODES, MESSAGES, parseBody, setHeader } from '../utils/helpers';
 import { User } from '../models/user.model';
 
 export async function getAllUsers(req: IncomingMessage, res: ServerResponse) {
-  setHeader(res, CODES.OK);
-  res.end(JSON.stringify(UsersDb.getAll()));
+  try {
+    setHeader(res, CODES.OK);
+    res.end(JSON.stringify(UsersDb.getAll()));
+  } catch {
+    setHeader(res, CODES.SERVER_ERROR);
+    res.end(JSON.stringify({ message: MESSAGES.SERVER_ERROR }));
+  }
 }
 
 export async function getUserById(req: IncomingMessage, res: ServerResponse, id: string) {
-  if (!validateUUID(id)) {
-    setHeader(res, CODES.INVALID);
-    res.end(JSON.stringify({ message: MESSAGES.INVALID_UUID }));
-    return;
-  }
+  try {
+    if (!validateUUID(id)) {
+      setHeader(res, CODES.INVALID);
+      res.end(JSON.stringify({ message: MESSAGES.INVALID_UUID }));
+      return;
+    }
 
-  const user = UsersDb.getById(id);
-  if (!user) {
-    setHeader(res, CODES.NOT_FOUND);
-    res.end(JSON.stringify({ message: MESSAGES.USER_NOT_FOUND }));
-    return;
-  }
+    const user = UsersDb.getById(id);
+    if (!user) {
+      setHeader(res, CODES.NOT_FOUND);
+      res.end(JSON.stringify({ message: MESSAGES.USER_NOT_FOUND }));
+      return;
+    }
 
-  setHeader(res, CODES.OK);
-  res.end(JSON.stringify(user));
+    setHeader(res, CODES.OK);
+    res.end(JSON.stringify(user));
+  } catch {
+    setHeader(res, CODES.SERVER_ERROR);
+    res.end(JSON.stringify({ message: MESSAGES.SERVER_ERROR }));
+  }
 }
 
 export async function createUser(req: IncomingMessage, res: ServerResponse) {
@@ -70,6 +80,28 @@ export async function updateUser(req: IncomingMessage, res: ServerResponse, id: 
 
     setHeader(res, CODES.OK);
     res.end(JSON.stringify(user));
+  } catch {
+    setHeader(res, CODES.SERVER_ERROR);
+    res.end(JSON.stringify({ message: MESSAGES.SERVER_ERROR }));
+  }
+}
+export async function deleteUser(req: IncomingMessage, res: ServerResponse, id: string) {
+  try {
+    if (!validateUUID(id)) {
+      setHeader(res, CODES.INVALID);
+      res.end(JSON.stringify({ message: MESSAGES.INVALID_UUID }));
+      return;
+    }
+
+    const deleteRes = UsersDb.delete(id);
+    if (!deleteRes) {
+      setHeader(res, CODES.NOT_FOUND);
+      res.end(JSON.stringify({ message: MESSAGES.USER_NOT_FOUND }));
+      return;
+    }
+
+    setHeader(res, CODES.DELETE);
+    res.end(JSON.stringify({ message: MESSAGES.USER_DELETED }));
   } catch {
     setHeader(res, CODES.SERVER_ERROR);
     res.end(JSON.stringify({ message: MESSAGES.SERVER_ERROR }));
