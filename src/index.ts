@@ -1,7 +1,7 @@
 import dotenv from 'dotenv';
 import { createServer } from 'node:http';
-import handleRequest from './routes/userRoutes';
-import { MESSAGES } from './utils/helpers';
+import handleRequest from './routes/user.router';
+import { MESSAGES } from './utils/constants';
 
 dotenv.config();
 

@@ -6,7 +6,8 @@ import {
   getUserById,
   updateUser,
 } from '../controllers/user.controller';
-import { CODES, MESSAGES, setHeader } from '../utils/helpers';
+import { CODES, MESSAGES } from '../utils/constants';
+import { setHeader } from '../utils/helpers';
 
 const END_POINTS = {
   USERS: '/api/users',

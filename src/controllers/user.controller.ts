@@ -1,7 +1,8 @@
 import { IncomingMessage, ServerResponse } from 'node:http';
 import { validate as validateUUID } from 'uuid';
 import userService from '../services/user.service';
-import { MESSAGES, parseBody, respond } from '../utils/helpers';
+import { MESSAGES } from '../utils/constants';
+import { parseBody, respond } from '../utils/helpers';
 import { User } from '../models/user.model';
 
 export async function getAllUsers(req: IncomingMessage, res: ServerResponse) {
