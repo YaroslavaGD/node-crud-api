@@ -1,13 +1,13 @@
 import { IncomingMessage, ServerResponse } from 'node:http';
 import { validate as validateUUID } from 'uuid';
-import UsersDb from '../db/usersDb';
+import userService from '../services/user.service';
 import { CODES, MESSAGES, parseBody, setHeader } from '../utils/helpers';
 import { User } from '../models/user.model';
 
 export async function getAllUsers(req: IncomingMessage, res: ServerResponse) {
   try {
     setHeader(res, CODES.OK);
-    res.end(JSON.stringify(UsersDb.getAll()));
+    res.end(JSON.stringify(userService.getAll()));
   } catch {
     setHeader(res, CODES.SERVER_ERROR);
     res.end(JSON.stringify({ message: MESSAGES.SERVER_ERROR }));
@@ -22,7 +22,7 @@ export async function getUserById(req: IncomingMessage, res: ServerResponse, id:
       return;
     }
 
-    const user = UsersDb.getById(id);
+    const user = userService.getById(id);
     if (!user) {
       setHeader(res, CODES.NOT_FOUND);
       res.end(JSON.stringify({ message: MESSAGES.USER_NOT_FOUND }));
@@ -47,7 +47,7 @@ export async function createUser(req: IncomingMessage, res: ServerResponse) {
       return;
     }
 
-    const newUser = UsersDb.create({ username, age, hobbies });
+    const newUser = userService.create({ username, age, hobbies });
     setHeader(res, CODES.CREATE);
     res.end(JSON.stringify(newUser));
   } catch {
@@ -71,7 +71,7 @@ export async function updateUser(req: IncomingMessage, res: ServerResponse, id: 
       return;
     }
 
-    const user = UsersDb.update(id, { username, age, hobbies });
+    const user = userService.update(id, { username, age, hobbies });
     if (!user) {
       setHeader(res, CODES.NOT_FOUND);
       res.end(JSON.stringify({ message: MESSAGES.USER_NOT_FOUND }));
@@ -93,7 +93,7 @@ export async function deleteUser(req: IncomingMessage, res: ServerResponse, id: 
       return;
     }
 
-    const deleteRes = UsersDb.delete(id);
+    const deleteRes = userService.delete(id);
     if (!deleteRes) {
       setHeader(res, CODES.NOT_FOUND);
       res.end(JSON.stringify({ message: MESSAGES.USER_NOT_FOUND }));
