@@ -5,7 +5,7 @@ import {
   getAllUsers,
   getUserById,
   updateUser,
-} from '../controllers/userController';
+} from '../controllers/user.controller';
 import { CODES, MESSAGES, setHeader } from '../utils/helpers';
 
 const END_POINTS = {
