@@ -74,6 +74,7 @@ export async function updateUser(req: IncomingMessage, res: ServerResponse, id: 
     respond.serverError(res);
   }
 }
+
 export async function deleteUser(req: IncomingMessage, res: ServerResponse, id: string) {
   try {
     if (!validateUUID(id)) {
