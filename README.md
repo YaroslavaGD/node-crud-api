@@ -22,6 +22,7 @@ This project implements a fully functional RESTful API for managing user data us
 ---
 
 ## 📁 Project Structure
+```
 ├── src/
 │ ├── controllers/ # Request handling logic
 │ ├── services/ # Business logic and data manipulation
@@ -37,7 +38,7 @@ This project implements a fully functional RESTful API for managing user data us
 ├── package.json
 ├── webpack.config.js
 └── README.md
-
+```
 ---
 
 ## Getting Started
@@ -53,14 +54,15 @@ git checkout dev
 
 ```bash
 npm install
-
+```
 ### 3. Change .env file
 
 ```env
 PORT=3000
-
+```
 ### 4. Run the application
 Development mode (hot reload using ts-node-dev)
 
 ```bash
 npm run start:dev
+```
