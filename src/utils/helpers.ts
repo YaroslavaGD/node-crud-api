@@ -12,12 +12,13 @@ export function parseBody<T>(req: IncomingMessage): Promise<T> {
     req.on('data', (chunk) => {
       body += chunk;
     });
+
     req.on('end', () => {
       try {
         const parsed = JSON.parse(body);
         resolve(parsed);
-      } catch (error) {
-        reject(error);
+      } catch {
+        reject(new Error('Invalid JSON'));
       }
     });
     req.on('error', reject);

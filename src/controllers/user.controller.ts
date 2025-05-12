@@ -44,8 +44,12 @@ export async function createUser(req: IncomingMessage, res: ServerResponse) {
 
     const newUser = userService.create({ username, age, hobbies });
     respond.created(res, newUser);
-  } catch {
-    respond.serverError(res);
+  } catch (error) {
+    if (error instanceof Error && error.message === 'Invalid JSON') {
+      respond.badRequest(res, MESSAGES.INVALID_FIELDS);
+    } else {
+      respond.serverError(res);
+    }
   }
 }
 
@@ -70,8 +74,12 @@ export async function updateUser(req: IncomingMessage, res: ServerResponse, id: 
     }
 
     respond.ok(res, updated);
-  } catch {
-    respond.serverError(res);
+  } catch (error) {
+    if (error instanceof Error && error.message === 'Invalid JSON') {
+      respond.badRequest(res, MESSAGES.INVALID_FIELDS);
+    } else {
+      respond.serverError(res);
+    }
   }
 }
 
