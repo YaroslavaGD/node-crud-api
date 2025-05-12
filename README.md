@@ -21,7 +21,7 @@ This project implements a functional RESTful API for managing user data using in
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 ```
 ├── src/
 │ ├── controllers/ # Request handling logic
@@ -49,17 +49,20 @@ This project implements a functional RESTful API for managing user data using in
 git https://github.com/YaroslavaGD/node-crud-api.git
 cd node-crud-api
 git checkout dev
+```
 
 ### 2. Install dependencies
 
 ```bash
 npm install
 ```
+
 ### 3. Change .env file
 
 ```env
 PORT=3000
 ```
+
 ### 4. Run the application
 
 #### Development mode (hot reload using `ts-node-dev`)
@@ -77,9 +80,7 @@ npm run start:prod
 
 ---
 
----
-
-## 📦 Available Scripts
+## Available Scripts
 
 | Script              | Description                                      |
 |---------------------|--------------------------------------------------|
@@ -91,7 +92,7 @@ npm run start:prod
 
 ---
 
-## 📘 API Endpoints
+## API Endpoints
 
 All endpoints follow the base URL: `http://localhost:{PORT}/api/users`
 
@@ -103,7 +104,7 @@ All endpoints follow the base URL: `http://localhost:{PORT}/api/users`
 | PUT    | `/api/users/:id`    | Update existing user  |
 | DELETE | `/api/users/:id`    | Delete user by ID     |
 
-### 📥 Request body (for POST/PUT)
+### Request body (for POST/PUT)
 
 ```json
 {
@@ -115,7 +116,7 @@ All endpoints follow the base URL: `http://localhost:{PORT}/api/users`
 
 ---
 
-## ✅ Validation Rules
+## Validation Rules
 
 - All fields (`username`, `age`, `hobbies`) are **required**
 - `id` must be a **valid UUID**
@@ -127,7 +128,7 @@ All endpoints follow the base URL: `http://localhost:{PORT}/api/users`
 
 ---
 
-## 🔮 Planned Enhancements
+## Planned Enhancements
 
 - [ ] Switch from in-memory DB to persistent DB (e.g. PostgreSQL)
 - [ ] Add logging and request middleware
@@ -136,13 +137,13 @@ All endpoints follow the base URL: `http://localhost:{PORT}/api/users`
 
 ---
 
-## 👤 Author
+## Author
 
 **YaroslavaGD**  
 [github.com/YaroslavaGD](https://github.com/YaroslavaGD)
 
 ---
 
-## 📄 License
+## License
 
 This project is licensed under the **ISC License** — free for personal and commercial use.
